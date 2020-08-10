@@ -12,6 +12,9 @@ const config = {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
 	},
+	devServer: {
+		contentBase: './dist',
+	},
 	module: {
 		rules: [
 		  {
@@ -25,7 +28,14 @@ const config = {
 	},
 	plugins: [
 		new webpack.ProgressPlugin(),
-		new HtmlWebpackPlugin({ template: './src/index.html'}),
+		new HtmlWebpackPlugin({ 
+			filename: 'images.html',
+			template: './src/html/views/images.html'
+		}),
+		new HtmlWebpackPlugin({ 
+			filename: 'index.html',
+			template: './src/html/views/index.html'
+		}),
 	],
 };
 

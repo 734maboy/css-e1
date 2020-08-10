@@ -1,13 +1,36 @@
-import _ from 'lodash';
-import '../css/style.css';
+	import _ from 'lodash';
+	import '../css/style.css';
+	
+	const links = [
+		{
+			"href": "./index.html",
+			"name": "Main page",
+		},
+		{
+			"href": "./images.html",
+			"name": "Images page",
+		},
+	];
 
-  function component() {
-    const element = document.createElement('div');
+	
+	function navMenu() {
+		const elements = {
+			"header": document.createElement('header'),
+			"nav": document.createElement('nav'),
+			"ul": document.createElement('ul'),
+		};
 
-		element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-		element.classList.add('hello');
+		links.forEach(injectListItem, elements);
+		elements.nav.appendChild(elements.ul);
+		elements.header.appendChild(elements.nav);
 
-    return element;
-  }
+		return elements.header;
+	}
 
-  document.body.appendChild(component());
+	function injectListItem(elem) {
+		let li = document.createElement('li');
+		li.insertAdjacentHTML('afterbegin', `<a href="${elem.href}">${elem.name}</a>`);
+		this.ul.appendChild(li);
+	}
+
+  document.body.insertAdjacentElement('afterbegin', navMenu());
